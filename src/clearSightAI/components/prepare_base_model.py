@@ -63,11 +63,13 @@ class PrepareBaseModel:
             outputs=prediction
         )
 
+
         full_model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
-            loss=tf.keras.losses.BinaryCrossentropy(),
+            loss=tf.keras.losses.BinaryCrossentropy(reduction='sum_over_batch_size'),
             metrics=["accuracy"]
         )
+
 
         full_model.summary()
         return full_model
